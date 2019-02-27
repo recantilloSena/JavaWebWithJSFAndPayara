@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{eng.ListCustomerTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+         <h:form id="CustomerListForm">
+         
+             
+             <p:selectOneMenu id="rate" value="#{customerController.rate}" >
+                <f:selectItem itemLabel="Select One" itemValue="0" />
+                <f:selectItem itemLabel="H" itemValue="16" />
+                <f:selectItem itemLabel="M" itemValue="11" />
+                <f:selectItem itemLabel="L" itemValue="7" />
+                <f:selectItem itemLabel="N" itemValue="5" />
+              </p:selectOneMenu>
+                
+             <p:commandButton value="Submit" update="display datalist"  action="#{customerController.onRateChange()}"  />
+  
+               
+               <h:outputText id="display" value="#{customerController.rate}" />  
+               
+               
+                <p:panel header="#{eng.ListCustomerTitle}">
+                    
+                    <p:dataTable id="datalist" value="#{customerController.itemsRate}" var="item"
+                                 selectionMode="single" selection="#{customerController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.customerId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rendererType=""
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_customerId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.customerId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_name}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_addressline1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.addressline1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_addressline2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.addressline2}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_city}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.city}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_state}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.state}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_phone}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.phone}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_fax}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fax}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_email}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.email}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_creditLimit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.creditLimit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_discountCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.discountCode}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{eng.ListCustomerTitle_zip}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.zip}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{eng.Create}" actionListener="#{customerController.prepareCreate}" update=":CustomerCreateForm" oncomplete="PF('CustomerCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{eng.View}" update=":CustomerViewForm" oncomplete="PF('CustomerViewDialog').show()" disabled="#{empty customerController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{eng.Edit}" update=":CustomerEditForm" oncomplete="PF('CustomerEditDialog').show()" disabled="#{empty customerController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{eng.Delete}" actionListener="#{customerController.destroy}" update=":growl,datalist" disabled="#{empty customerController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CustomerViewDlg" widgetVar="CustomerViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{eng.ViewCustomerTitle}">
+            <h:form id="CustomerViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
+                        <h:outputText value="#{eng.ViewCustomerLabel_customerId}"/>
+                        <h:outputText value="#{customerController.selected.customerId}" title="#{eng.ViewCustomerTitle_customerId}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_name}"/>
+                        <h:outputText value="#{customerController.selected.name}" title="#{eng.ViewCustomerTitle_name}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_addressline1}"/>
+                        <h:outputText value="#{customerController.selected.addressline1}" title="#{eng.ViewCustomerTitle_addressline1}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_addressline2}"/>
+                        <h:outputText value="#{customerController.selected.addressline2}" title="#{eng.ViewCustomerTitle_addressline2}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_city}"/>
+                        <h:outputText value="#{customerController.selected.city}" title="#{eng.ViewCustomerTitle_city}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_state}"/>
+                        <h:outputText value="#{customerController.selected.state}" title="#{eng.ViewCustomerTitle_state}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_phone}"/>
+                        <h:outputText value="#{customerController.selected.phone}" title="#{eng.ViewCustomerTitle_phone}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_fax}"/>
+                        <h:outputText value="#{customerController.selected.fax}" title="#{eng.ViewCustomerTitle_fax}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_email}"/>
+                        <h:outputText value="#{customerController.selected.email}" title="#{eng.ViewCustomerTitle_email}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_creditLimit}"/>
+                        <h:outputText value="#{customerController.selected.creditLimit}" title="#{eng.ViewCustomerTitle_creditLimit}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_discountCode}"/>
+                        <h:outputText value="#{customerController.selected.discountCode}" title="#{eng.ViewCustomerTitle_discountCode}"/>
+                        <h:outputText value="#{eng.ViewCustomerLabel_zip}"/>
+                        <h:outputText value="#{customerController.selected.zip}" title="#{eng.ViewCustomerTitle_zip}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{eng.Close}" onclick="CustomerViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

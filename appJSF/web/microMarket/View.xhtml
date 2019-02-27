@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MicroMarketViewDlg" widgetVar="MicroMarketViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{eng.ViewMicroMarketTitle}">
+            <h:form id="MicroMarketViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{microMarketController.selected != null}">
+                        <h:outputText value="#{eng.ViewMicroMarketLabel_zipCode}"/>
+                        <h:outputText value="#{microMarketController.selected.zipCode}" title="#{eng.ViewMicroMarketTitle_zipCode}"/>
+                        <h:outputText value="#{eng.ViewMicroMarketLabel_radius}"/>
+                        <h:outputText value="#{microMarketController.selected.radius}" title="#{eng.ViewMicroMarketTitle_radius}"/>
+                        <h:outputText value="#{eng.ViewMicroMarketLabel_areaLength}"/>
+                        <h:outputText value="#{microMarketController.selected.areaLength}" title="#{eng.ViewMicroMarketTitle_areaLength}"/>
+                        <h:outputText value="#{eng.ViewMicroMarketLabel_areaWidth}"/>
+                        <h:outputText value="#{microMarketController.selected.areaWidth}" title="#{eng.ViewMicroMarketTitle_areaWidth}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{eng.Close}" onclick="MicroMarketViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
